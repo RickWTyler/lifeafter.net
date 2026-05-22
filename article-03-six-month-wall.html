@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 6-Month Wall — Life|After Insights</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2845;
+    --navy-soft: #2a3a5c;
+    --gold: #c9a961;
+    --gold-deep: #a88a45;
+    --ink: #2a2a2a;
+    --muted: #6a6a6a;
+    --cream: #fafaf7;
+    --rule: #e5e5e0;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 72px 56px 96px;
+  }
+
+  /* Masthead */
+  .masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 56px;
+  }
+
+  .brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--navy);
+    letter-spacing: 0.01em;
+  }
+
+  .brand .pipe {
+    color: var(--gold);
+    font-weight: 600;
+    margin: 0 1px;
+  }
+
+  .brand .reg {
+    font-size: 11px;
+    vertical-align: super;
+    color: var(--gold-deep);
+  }
+
+  .masthead-meta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Category */
+  .category {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 28px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  /* Title */
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 52px;
+    line-height: 1.1;
+    color: var(--navy);
+    margin: 0 0 24px 0;
+    letter-spacing: -0.005em;
+  }
+
+  h1 .title-lead {
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  h1 .title-tail {
+    display: block;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--navy-soft);
+  }
+
+  .dek {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--muted);
+    margin: 0 0 48px 0;
+    max-width: 620px;
+  }
+
+  /* Lead paragraph */
+  .lead {
+    font-size: 19px;
+    line-height: 1.7;
+    color: var(--ink);
+    margin: 0 0 22px 0;
+  }
+
+  .lead:first-letter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 76px;
+    font-weight: 500;
+    color: var(--navy);
+    float: left;
+    line-height: 0.85;
+    margin: 8px 12px -6px 0;
+  }
+
+  /* Body */
+  p {
+    font-size: 17px;
+    line-height: 1.75;
+    margin: 0 0 22px 0;
+    color: var(--ink);
+  }
+
+  p strong {
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  /* Single-sentence emphasis line */
+  .standout {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 24px;
+    line-height: 1.5;
+    color: var(--navy);
+    margin: 32px 0;
+    padding-left: 24px;
+    border-left: 3px solid var(--gold);
+  }
+
+  /* Section heading */
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.25;
+    color: var(--navy);
+    margin: 56px 0 24px 0;
+    letter-spacing: -0.005em;
+  }
+
+  /* Lists */
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px 0;
+  }
+
+  ul li {
+    position: relative;
+    padding: 0 0 18px 28px;
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 14px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  ul li strong {
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  /* Pull quote */
+  .pull-quote {
+    margin: 56px -16px;
+    padding: 36px 40px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    text-align: center;
+  }
+
+  .pull-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--navy);
+    margin: 0;
+  }
+
+  /* Article end note */
+  .end-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--muted);
+    text-align: center;
+    margin: 56px 0 0;
+    letter-spacing: 0.02em;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .footer .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--navy);
+    letter-spacing: 0.01em;
+  }
+
+  .footer .footer-brand .pipe { color: var(--gold); }
+  .footer .footer-brand .reg { font-size: 9px; vertical-align: super; color: var(--gold-deep); }
+
+  .footer .footer-url {
+    letter-spacing: 0.08em;
+  }
+
+  /* Print */
+  @media print {
+    body { background: white; }
+    .page { padding: 32px; max-width: 100%; }
+    h1 { font-size: 42px; }
+    .lead { font-size: 16px; }
+    p, ul li { font-size: 13px; line-height: 1.6; }
+    h2 { font-size: 24px; margin: 32px 0 16px; }
+    .pull-quote { margin: 32px 0; padding: 24px; page-break-inside: avoid; }
+    .pull-quote p { font-size: 20px; }
+    .standout { font-size: 18px; }
+    .end-note { font-size: 12px; margin-top: 28px; }
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .page { padding: 40px 24px 64px; }
+    h1 { font-size: 36px; }
+    .dek { font-size: 18px; }
+    .lead { font-size: 17px; }
+    p, ul li { font-size: 16px; }
+    h2 { font-size: 24px; }
+    .pull-quote { margin: 40px 0; padding: 28px 20px; }
+    .pull-quote p { font-size: 22px; }
+    .standout { font-size: 20px; padding-left: 18px; }
+    .end-note { font-size: 14px; margin-top: 40px; }
+    .masthead { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="masthead">
+    <div class="brand">Life<span class="pipe">|</span>After<span class="reg">®</span></div>
+    <div class="masthead-meta">Insights &nbsp;·&nbsp; May 2026</div>
+  </header>
+
+  <div class="category">Return-to-Work</div>
+
+  <h1>
+    <span class="title-lead">The 6-Month Wall</span>
+    <span class="title-tail">Why so many survivors quit jobs they fought to keep</span>
+  </h1>
+
+  <p class="dek">The pattern most employers never see coming — and the reason a "successful" return so often ends in a quiet resignation half a year later.</p>
+
+  <p class="lead">She kept the job through chemo. Negotiated the schedule. Made the calls from the infusion chair. Showed up the Monday after her last treatment because she said she would.</p>
+
+  <p class="standout">Six months later, she resigned.</p>
+
+  <p>This is the pattern most employers never see coming. The survivor who fought to stay employed through active treatment — who used PTO strategically, took FMLA in increments, declined the "just focus on getting well" advice from well-meaning colleagues — walks away from the job after the worst is supposedly behind them.</p>
+
+  <p>It isn't ingratitude. It isn't burnout in the conventional sense. It's the 6-month wall, and it's the most underdiagnosed problem in cancer survivorship and return-to-work.</p>
+
+  <h2>What actually happens around month six</h2>
+
+  <p>For most cancer survivors who continue working through treatment or return shortly after, the first weeks back follow a recognizable arc. There's relief at being "normal" again. Colleagues are attentive. Accommodations are honored. The survivor pushes hard — often harder than they should — to prove they're still capable, still valuable, still themselves.</p>
+
+  <p>Then, somewhere between months four and seven, several things converge:</p>
+
+  <ul>
+    <li><strong>The accommodations quietly erode.</strong> Meeting loads return to baseline. The "let me cover that for you" offers fade. Nothing is announced; it just stops.</li>
+    <li><strong>Fatigue doesn't lift the way everyone assumed it would.</strong> Cancer-related fatigue is biologically different from ordinary tiredness, and for many survivors it persists twelve to twenty-four months past the end of treatment.</li>
+    <li><strong>Cognitive changes surface under pressure.</strong> The processing delays, word-finding gaps, and short-term memory hiccups that were manageable in week three become humiliating in month six, when the work has fully ramped back up.</li>
+    <li><strong>The mental health bill comes due.</strong> PTSD-pattern symptoms, anxiety, and depression frequently peak six to twelve months post-treatment — not during it. The mind finally has room to feel what it couldn't afford to feel during the crisis.</li>
+    <li><strong>Identity catches up.</strong> Many survivors return to work intending to reclaim their old life and discover, somewhere in month five, that their old life no longer fits who they've become.</li>
+  </ul>
+
+  <p>None of these are character flaws. None of them are visible. And none of them are addressed by the standard return-to-work playbook, which assumes recovery is a linear ramp that ends when treatment does.</p>
+
+  <div class="pull-quote">
+    <p>The cruel irony of month six is that this is roughly when survivors look most recovered to everyone else.</p>
+  </div>
+
+  <h2>Why "you look fine" makes it worse</h2>
+
+  <p>Hair has come back. Color has returned. The visible cues that prompted patience and accommodation are gone.</p>
+
+  <p>For colleagues and managers, this reads as full recovery. For the survivor, it can feel like the support structure dissolved exactly when they needed it most. Many describe this period as lonelier than active treatment — because during treatment, the struggle was legible. After treatment, the struggle is private.</p>
+
+  <p>This is when survivors start running the math. They're exhausted. They're underperforming by their own standards. They're not sure they recognize the person who came back to the desk. And no one is checking on them anymore, because everyone assumes they're past it.</p>
+
+  <h2>The decision that looks sudden but isn't</h2>
+
+  <p>By the time a survivor hands in notice, the decision is usually months old. They've been quietly assessing whether the job — this particular job, this particular pace, this particular set of demands — is compatible with the person they now are.</p>
+
+  <p>Some leave for less demanding work. Some take a sabbatical that becomes permanent. Some go independent. Some leave the workforce entirely for a stretch. A meaningful number of these exits weren't necessary. The survivor would have stayed if the right conversations had happened, in the right way, at the right time.</p>
+
+  <p>The scale of this pattern is visible in the workforce data. Seventy percent of cancer survivors remain employed through the first year after diagnosis. By year five, that number has dropped to fifty-one percent — a nineteen-point decline that doesn't happen all at once, and doesn't announce itself in the claims data. It happens one quiet resignation at a time, in the months after everyone assumed the hard part was over.</p>
+
+  <p>The cost to employers is real and largely uncounted. Replacing a mid-career professional commonly runs fifty to two hundred percent of annual salary once recruiting, onboarding, and ramp time are included. The institutional knowledge walks out the door with them. And the next survivor on the team watches the whole thing and quietly updates their own contingency plan.</p>
+
+  <h2>What structured support actually looks like</h2>
+
+  <p>The 6-month wall is predictable, which means it's navigable. A few things that consistently help:</p>
+
+  <ul>
+    <li><strong>A real check-in cadence past month three.</strong> Not "how are you feeling?" once a quarter, but a structured conversation that asks about workload calibration, cognitive bandwidth, and what's quietly getting harder.</li>
+    <li><strong>A workload conversation that's honest.</strong> Most survivors won't ask for less. They have to be offered a recalibration without it feeling like a demotion.</li>
+    <li><strong>Permission to renegotiate.</strong> The accommodations a survivor needed in month one are not the accommodations they need in month six. The biggest support failure is treating the early plan as a fixed plan.</li>
+    <li><strong>A path that isn't binary.</strong> "Stay full-time at full load" or "leave" should not be the only two options on the table. Survivors who leave often do so because they didn't see a third door.</li>
+    <li><strong>Someone whose job it is to notice.</strong> Not the manager, who has competing incentives. Not HR, which usually gets involved only after something has broken. A neutral party whose role is specifically to walk with the survivor through the first year back.</li>
+  </ul>
+
+  <h2>A different ending is possible</h2>
+
+  <p>The survivors who make it past month twelve, in our experience, are rarely the ones with the easiest cases. They're the ones whose return was managed past the visible part of recovery — past the surgical scars, past the bald head, past the point where everyone else assumed the hard part was over.</p>
+
+  <p>The 6-month wall isn't a moment of weakness. It's a predictable phase of a long recovery, and it deserves to be planned for the same way any other predictable risk is planned for.</p>
+
+  <p>The survivor in the opening is composite, but the story isn't unusual. The version of it that ends differently looks almost identical for the first three months. The difference shows up in month four, when someone notices the quiet recalibration before it becomes a quiet decision.</p>
+
+  <p class="end-note">Sources available on request.</p>
+
+  <footer class="footer">
+    <div class="footer-brand">Life<span class="pipe">|</span>After<span class="reg">®</span></div>
+    <div class="footer-url">lifeafter.net</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

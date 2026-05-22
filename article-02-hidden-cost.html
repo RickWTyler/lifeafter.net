@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hidden Cost of a Cancer Diagnosis on a Workforce | Life|After® Insights</title>
+<meta name="description" content="Why the medical claim is the smallest part of what an employer actually pays — and where the unbooked costs are really hiding.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #102a4c;
+    --navy-deep: #0a1e3a;
+    --navy-soft: #1d3a63;
+    --gold: #b8924a;
+    --gold-soft: #d4b275;
+    --cream: #faf7f1;
+    --cream-deep: #f2ede1;
+    --ink: #1c1c1c;
+    --ink-soft: #3a3a3a;
+    --rule: #d8cfb8;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Masthead */
+  .masthead {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 22px 0;
+    border-bottom: 3px solid var(--gold);
+  }
+  .masthead-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .brand {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .brand .reg {
+    font-size: 12px;
+    vertical-align: super;
+    color: var(--gold-soft);
+    margin-left: 1px;
+  }
+  .masthead-meta {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+  }
+
+  /* Hero */
+  .hero {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 70px 32px 90px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(184, 146, 74, 0.12), transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 28px;
+    display: inline-block;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--gold);
+  }
+  h1.title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(34px, 5.5vw, 58px);
+    line-height: 1.12;
+    letter-spacing: -0.5px;
+    color: var(--cream);
+    margin-bottom: 28px;
+    max-width: 18ch;
+  }
+  .deck {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(19px, 2.2vw, 24px);
+    line-height: 1.5;
+    color: var(--gold-soft);
+    max-width: 38ch;
+    font-weight: 400;
+  }
+  .byline {
+    margin-top: 50px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(216, 207, 184, 0.18);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(250, 247, 241, 0.75);
+  }
+  .byline strong {
+    color: var(--cream);
+    font-weight: 500;
+  }
+  .byline div { display: flex; flex-direction: column; gap: 4px; }
+  .byline .label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--gold-soft);
+  }
+
+  /* Article body */
+  article {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 80px 32px 60px;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: 24px;
+    line-height: 1.5;
+    color: var(--navy-deep);
+    margin-bottom: 36px;
+    font-weight: 400;
+  }
+  .lede::first-letter {
+    font-family: var(--serif);
+    font-size: 78px;
+    line-height: 0.85;
+    float: left;
+    margin: 6px 12px 0 0;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  article p {
+    margin-bottom: 22px;
+    color: var(--ink-soft);
+  }
+  article p strong {
+    color: var(--navy-deep);
+    font-weight: 500;
+  }
+
+  h2.section {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 1.2;
+    color: var(--navy-deep);
+    margin: 56px 0 22px;
+    position: relative;
+    padding-left: 22px;
+  }
+  h2.section::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    bottom: 12px;
+    width: 4px;
+    background: var(--gold);
+  }
+  h2.section .num {
+    display: block;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  ul.cost-list {
+    list-style: none;
+    margin: 16px 0 28px;
+    padding: 0;
+  }
+  ul.cost-list li {
+    padding: 14px 0 14px 28px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    color: var(--ink-soft);
+  }
+  ul.cost-list li:last-child { border-bottom: none; }
+  ul.cost-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 24px;
+    width: 14px;
+    height: 1px;
+    background: var(--gold);
+  }
+  ul.cost-list li strong {
+    color: var(--navy-deep);
+    font-weight: 500;
+  }
+
+  /* Pull-quote stat */
+  .stat-callout {
+    background: var(--cream-deep);
+    border-left: 4px solid var(--gold);
+    padding: 36px 40px;
+    margin: 40px -20px;
+    position: relative;
+  }
+  .stat-callout .stat {
+    font-family: var(--serif);
+    font-size: 56px;
+    font-weight: 600;
+    color: var(--navy-deep);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .stat-callout .stat-label {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 20px;
+    color: var(--navy-soft);
+    line-height: 1.4;
+  }
+
+  /* Closing */
+  .closing {
+    margin-top: 56px;
+    padding-top: 36px;
+    border-top: 1px solid var(--rule);
+  }
+  .closing p {
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--navy-deep);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  /* Methodology */
+  .methodology {
+    background: var(--cream-deep);
+    padding: 64px 32px 72px;
+    border-top: 3px solid var(--gold);
+  }
+  .methodology-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .methodology h3 {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .methodology .methodology-title {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--navy-deep);
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .methodology p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+  .methodology p strong {
+    color: var(--navy-deep);
+    font-weight: 500;
+  }
+  .methodology em {
+    color: var(--navy);
+    font-style: italic;
+  }
+  .methodology p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--navy-deep);
+    color: var(--cream);
+    padding: 56px 32px;
+    margin-top: 80px;
+    text-align: center;
+  }
+  footer .footer-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  footer .signature {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+  footer .signature .reg {
+    font-size: 13px;
+    vertical-align: super;
+    color: var(--gold-soft);
+  }
+  footer .tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--gold-soft);
+    font-size: 17px;
+    margin-bottom: 32px;
+  }
+  footer .url {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  footer .divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 24px auto;
+  }
+
+  @media (max-width: 600px) {
+    article { padding: 50px 24px 40px; }
+    .hero { padding: 50px 24px 70px; }
+    .stat-callout { margin: 32px 0; padding: 28px; }
+    .stat-callout .stat { font-size: 44px; }
+    h2.section { font-size: 28px; }
+    .lede { font-size: 20px; }
+    .lede::first-letter { font-size: 60px; }
+  }
+
+  @media print {
+    body { background: white; font-size: 12pt; }
+    .masthead, footer { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .hero { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .stat-callout { background: var(--cream-deep) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    article { padding: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="brand">Life|After<span class="reg">®</span> &nbsp;<span style="opacity: 0.6; font-size: 14px; font-family: var(--sans); font-weight: 300; letter-spacing: 3px;">INSIGHTS</span></div>
+    <div class="masthead-meta">Workforce &nbsp;·&nbsp; Survivorship &nbsp;·&nbsp; Return-to-Work</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">The Math No One Books</span>
+    <h1 class="title">The Hidden Cost of a Cancer Diagnosis on a Workforce</h1>
+    <p class="deck">Why the medical claim is the smallest part of what an employer actually pays — and where the unbooked costs are really hiding.</p>
+    <div class="byline">
+      <div>
+        <span class="label">By</span>
+        <strong>Rick Tyler</strong>
+      </div>
+      <div>
+        <span class="label">Published</span>
+        <strong>Life|After® Insights</strong>
+      </div>
+      <div>
+        <span class="label">Read</span>
+        <strong>6 minutes</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<article>
+  <p class="lede">The diagnosis lands on a Tuesday. By Friday, HR has the FMLA paperwork started, the manager has reshuffled a few projects, and the claims data has begun to populate. From the outside, that is the cost: a medical claim, a defined leave period, and a return-to-work date that gets quietly slipped twice.</p>
+
+  <p>That is not the cost. That is what is <em>measurable</em> in the first ninety days.</p>
+
+  <p>The actual cost of a cancer diagnosis on a workforce lives in three places that do not appear on a claims dashboard. The productivity tail that extends six to eighteen months past active treatment. The coverage cost of getting the work done while the employee is in and out. And the caregiver pull-through that touches roughly one in four of your other employees — people who are not on the claim, not on FMLA, and not, by any number the employer can see, in trouble.</p>
+
+  <p>They are in trouble. The employer is just not looking in the right place.</p>
+
+  <h2 class="section"><span class="num">One</span>The Productivity Tail</h2>
+
+  <p>Active treatment ends. The employee returns. The line item closes. The data system thinks the case is over.</p>
+
+  <p>It is not. Most cancer survivors carry a measurable productivity tail for six to eighteen months past treatment — fatigue that does not resolve on the timeline anyone expected, cognitive effects sometimes called "chemo brain," appointments that continue (scans, oncology follow-up, reconstruction, infusions), and the deeply human reality of someone re-learning how to do their job while still in active recovery.</p>
+
+  <p>None of this is malingering. It is the actual clinical and emotional trajectory of survivorship. But because the formal leave has closed and the employee is back at their desk, the cost becomes invisible — absorbed by the team, the manager, and the survivor themselves.</p>
+
+  <p>For a mid-size group carrying an active caseload of twelve to twenty employees navigating cancer at any given time, the tail compounds quickly. It is, conservatively, the largest single category of hidden cost — and the one most employers have no instrument to see.</p>
+
+  <h2 class="section"><span class="num">Two</span>Coverage Cost</h2>
+
+  <p>While the employee is in active treatment or working at reduced capacity, the work does not pause. It gets reassigned, contracted out, or absorbed by colleagues. Each of those options carries a cost the medical claim never shows.</p>
+
+  <ul class="cost-list">
+    <li><strong>Reassigned work</strong> means another employee is doing two jobs — overtime, errors, eventual burnout, and a second person who starts looking elsewhere.</li>
+    <li><strong>Contracted coverage</strong> means a temp or consultant at a higher hourly rate than the original employee, with a ramp-up period and no institutional memory.</li>
+    <li><strong>Absorbed work</strong> means a slow degradation in team output that surfaces six months later as missed deadlines, slipped revenue, or attrition with vague exit-interview reasons.</li>
+  </ul>
+
+  <p>Coverage cost is real, recurring, and largely unbooked. It does not appear in the benefits line, the payroll line, or the medical claim. It shows up in operating expense, where no one is looking for it.</p>
+
+  <h2 class="section"><span class="num">Three</span>The 1-in-4 Caregiver Pull-Through</h2>
+
+  <p>This is the cost most employers never connect to a cancer diagnosis at all.</p>
+
+  <div class="stat-callout">
+    <div class="stat">1&nbsp;in&nbsp;4</div>
+    <div class="stat-label">Only one in four of the people in your workforce whose life is being reshaped by cancer right now is the patient. The other three are caregivers — for a spouse, parent, child, or sibling. None of them are on your claim. None of them, by any metric you have, are flagged.</div>
+  </div>
+
+  <p>They are taking calls during meetings. They are leaving early for appointments. They are sleeping four hours, rationing PTO against treatment schedules they cannot control, and absorbing a second job no one ever offered them. Their performance softens. Their engagement scores drop. Some of them resign and the exit interview says "needed a change."</p>
+
+  <p>The 1-in-4 ratio is the most-underestimated number in this entire conversation. A workforce of 1,000 sees roughly ten new cancer diagnoses each year. At the same time — and separately — an estimated thirty to forty employees inside that same workforce are actively caring for someone with cancer outside of work. A parent. A spouse. A child. A sibling.</p>
+
+  <p>That is forty to fifty people, not ten, whose work life is being shaped by cancer at any given moment. None of the caregivers are on the claims file. None of them are on FMLA. None of them, by any metric the employer has access to, are flagged.</p>
+
+  <h2 class="section"><span class="num">Four</span>What This Adds Up To</h2>
+
+  <p>The medical claim is real, but it is bounded, expected, and largely covered by the carrier. The productivity tail, coverage cost, and caregiver pull-through are unbounded, mostly invisible, and paid entirely by the employer — in the form of slower output, higher turnover, and benefit dollars spent without any structured return-to-work support behind them.</p>
+
+  <p>The question worth asking is not how much the medical side costs. The carrier already tracks that, and there is a whole industry built around managing it.</p>
+
+  <div class="closing">
+    <p>The question is what the other three categories are costing — and whether anyone inside the organization is positioned to do anything about them.</p>
+  </div>
+</article>
+
+<section class="methodology">
+  <div class="methodology-inner">
+    <h3>Sources &amp; Methodology</h3>
+    <div class="methodology-title">How the numbers in this piece were built</div>
+
+    <p><strong>Cancer incidence and prevalence.</strong> American Cancer Society, <em>Cancer Facts &amp; Figures 2026</em> (Atlanta: American Cancer Society, 2026). ACS projects approximately 2.1 million new US cancer cases in 2026 against an active survivor population of roughly 18 million. The 1% annual incidence rate used throughout this article approximates the working-age share derived from these projections.</p>
+
+    <p><strong>Productivity tail, fatigue, cognitive effects, and return to work.</strong> National Comprehensive Cancer Network, <em>NCCN Clinical Practice Guidelines in Oncology — Survivorship</em> (current version). The Guidelines include dedicated late-effects chapters on Cognitive Function, Fatigue, and Employment and Return to Work, which together establish the six-to-eighteen-month post-treatment trajectory referenced in Section One.</p>
+
+    <p><strong>Caregiver figures.</strong> AARP and the National Alliance for Caregiving, <em>Caregiving in the US 2025</em> (Washington, DC: AARP, July 24, 2025). The 2025 edition — the most recent installment of a survey series running since 1997 — finds that 63 million Americans, roughly 1 in 4 adults, are family caregivers, and that approximately 70% of family caregivers are employed.</p>
+
+    <p><strong>On the "1 in 4" used in this article.</strong> The ratio refers to the impact group inside a workforce, not the workforce as a whole. For every one employee who is the cancer patient, an estimated three additional employees in the same workforce are actively caring for someone with cancer in their own life. This produces the thirty-to-forty cancer caregivers per 1,000-employee estimate cited in Section Three, derived from cancer prevalence (ACS) and the employed-caregiver share documented by AARP/NAC. The ratio also reflects more than two decades of return-to-work case experience inside Tyler Ergonomics &amp; Safety and the Life|After® program.</p>
+
+    <p><strong>Coverage cost.</strong> The categories described in Section Two — reassigned, contracted, and absorbed work — are presented qualitatively rather than with specific cost multipliers. Operating-expense impact varies materially by industry, role, and labor market, and is best modeled against an employer's own staffing data.</p>
+
+    <p><strong>What this article does not claim.</strong> No ADA-compliance, disability-incidence-reduction, or specific dollar-recovery figures are made in this piece. The intent is to surface unbooked workforce cost categories that traditional claims data does not see — not to estimate them for any individual employer.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="signature">Life|After<span class="reg">®</span></div>
+    <div class="tagline">Cancer survivorship, returned to work.</div>
+    <div class="divider"></div>
+    <a href="https://lifeafter.net" class="url">lifeafter.net</a>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Life|After® — Post-Treatment ROI Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:        #0a1628;
+  --navy-mid:    #112240;
+  --navy-light:  #1a3050;
+  --gold:        #c9a84c;
+  --gold-light:  #e8c97a;
+  --gold-dim:    rgba(201,168,76,0.45);
+  --cream:       #f5f0e8;
+  --white:       #ffffff;
+  --gray:        #8a9ab5;
+  --border-inv:  rgba(201,168,76,0.15);
+  --border-inv2: rgba(201,168,76,0.25);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--navy);
+  color: var(--cream);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(201,168,76,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 80%, rgba(201,168,76,0.04) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.page { position: relative; z-index: 1; max-width: 1120px; margin: 0 auto; padding: 2.5rem 3rem 4rem; }
+
+/* ── HEADER ── */
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid var(--border-inv);
+}
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.45rem; font-weight: 700;
+  color: var(--white); letter-spacing: -0.02em;
+  text-decoration: none; display: flex; align-items: baseline; gap: 0;
+  line-height: 1;
+}
+.logo .pipe { color: var(--gold); }
+.logo sup { font-size: 0.45em; font-family: 'DM Sans', sans-serif; color: var(--gray); margin-left: 1px; }
+.header-meta { text-align: right; }
+.header-badge {
+  display: inline-block;
+  font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); font-weight: 500;
+  background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.18);
+  padding: 0.25rem 0.65rem; border-radius: 20px;
+  margin-bottom: 0.35rem;
+}
+.header-tagline {
+  font-size: 0.72rem; color: var(--gray); font-weight: 300;
+  letter-spacing: 0.04em;
+}
+
+/* ── HERO ── */
+.hero {
+  margin-bottom: 2.75rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: end;
+}
+.hero-text h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3.5vw, 2.9rem);
+  font-weight: 700; line-height: 1.12;
+  letter-spacing: -0.03em; color: var(--white);
+  margin-bottom: 0.85rem;
+}
+.hero-text h1 em { color: var(--gold); font-style: italic; }
+.hero-text p {
+  font-size: 0.9rem; line-height: 1.85;
+  color: var(--gray); font-weight: 300;
+  max-width: 600px;
+}
+.hero-text p strong { color: var(--cream); font-weight: 400; }
+.hero-gold-rule { width: 40px; height: 2px; background: var(--gold); margin-top: 1.25rem; }
+
+.hero-stat-strip {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  align-items: flex-end; flex-shrink: 0;
+}
+.hero-stat {
+  text-align: right;
+  background: rgba(201,168,76,0.03);
+  border: 1px solid var(--border-inv);
+  border-radius: 4px;
+  padding: 0.65rem 1rem;
+  min-width: 130px;
+}
+.hero-stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; font-weight: 700; color: var(--white);
+  line-height: 1; letter-spacing: -0.02em;
+}
+.hero-stat-num.teal { color: var(--gold); }
+.hero-stat-label {
+  font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gray); margin-top: 0.2rem;
+}
+
+/* ── MAIN GRID ── */
+.main-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+  margin-bottom: 2.5rem;
+}
+
+/* ── SLIDERS PANEL ── */
+.sliders-panel { display: flex; flex-direction: column; gap: 0.85rem; }
+
+.panel-heading {
+  font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gray); font-weight: 500;
+  margin-bottom: 0.25rem; padding-left: 0.1rem;
+}
+
+.slider-card {
+  background: rgba(201,168,76,0.03);
+  border: 1px solid var(--border-inv);
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.slider-card:hover { border-color: rgba(201,168,76,0.2); background: rgba(201,168,76,0.06); }
+.slider-label {
+  font-size: 0.63rem; letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--gray); font-weight: 500; margin-bottom: 0.6rem;
+}
+.slider-display {
+  display: flex; align-items: baseline; gap: 0.35rem; margin-bottom: 0.75rem;
+}
+.slider-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; font-weight: 700; color: var(--white); line-height: 1;
+  letter-spacing: -0.02em; transition: color 0.2s;
+}
+.slider-unit { font-size: 0.75rem; color: var(--gray); font-weight: 300; }
+.roi-slider {
+  width: 100%; margin-bottom: 0.35rem;
+  -webkit-appearance: none; appearance: none;
+  height: 2px; border-radius: 2px; outline: none; cursor: pointer;
+  background: rgba(201,168,76,0.08);
+}
+.roi-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 15px; height: 15px; border-radius: 50%;
+  background: var(--gold); border: 2px solid var(--navy);
+  box-shadow: 0 0 0 1px rgba(201,168,76,0.6); cursor: pointer;
+  transition: transform 0.15s;
+}
+.roi-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+.slider-range {
+  display: flex; justify-content: space-between;
+  font-size: 0.65rem; color: var(--gray);
+}
+.slider-note {
+  margin-top: 0.75rem; padding-top: 0.75rem;
+  border-top: 1px solid var(--border-inv);
+  font-size: 0.74rem; line-height: 1.65;
+  color: var(--gray);
+}
+.slider-note strong { color: var(--cream); font-weight: 500; }
+
+/* ── RESULTS PANEL ── */
+.results-panel { display: flex; flex-direction: column; gap: 0; }
+
+/* ── IMPROVED TABLE ── */
+.roi-table-wrap {
+  border: 1px solid var(--border-inv2);
+  border-radius: 6px; overflow: hidden;
+}
+
+.roi-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+
+.roi-table thead tr {
+  background: rgba(201,168,76,0.05);
+  border-bottom: 1px solid var(--border-inv2);
+}
+.roi-table thead th {
+  padding: 0.9rem 1.25rem;
+  text-align: left;
+  font-size: 0.6rem; letter-spacing: 0.13em; text-transform: uppercase;
+  font-weight: 500; color: var(--gray);
+}
+.roi-table thead th.col-right { text-align: right; }
+.roi-table thead th.col-center { text-align: center; }
+
+.roi-table tbody tr {
+  border-bottom: 1px solid var(--border-inv);
+  transition: background 0.15s;
+}
+.roi-table tbody tr:last-child { border-bottom: none; }
+.roi-table tbody tr:not(.roi-total):not(.roi-subtotal):hover { background: rgba(201,168,76,0.03); }
+
+.roi-table td { padding: 1.1rem 1.25rem; vertical-align: top; }
+
+/* Path label + method */
+.path-name {
+  font-size: 0.84rem; font-weight: 500; color: var(--white);
+  display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem;
+}
+.path-tag {
+  display: inline-block; font-size: 0.58rem; letter-spacing: 0.08em;
+  text-transform: uppercase; font-weight: 600; font-family: 'DM Sans', sans-serif;
+  padding: 0.15rem 0.5rem; border-radius: 3px;
+  flex-shrink: 0;
+}
+.path-tag.a { background: rgba(201,168,76,0.10); color: var(--gold); border: 1px solid rgba(201,168,76,0.22); }
+.path-tag.b { background: rgba(201,168,76,0.08); color: var(--gold-light); border: 1px solid rgba(201,168,76,0.2); }
+.path-tag.c { background: rgba(138,154,181,0.1); color: var(--gray); border: 1px solid rgba(138,154,181,0.2); }
+
+.path-desc {
+  font-size: 0.74rem; color: var(--gray); line-height: 1.6;
+  font-weight: 300;
+}
+.path-source {
+  font-size: 0.67rem; color: rgba(138,154,181,0.6);
+  font-style: italic; margin-top: 0.3rem;
+}
+
+.td-prob { text-align: center; vertical-align: middle; }
+.prob-badge {
+  display: inline-block;
+  font-size: 0.67rem; font-weight: 500; letter-spacing: 0.03em;
+  padding: 0.22rem 0.65rem; border-radius: 20px; white-space: nowrap;
+}
+.prob-badge.green  { background: rgba(201,168,76,0.12); color: var(--gold); border: 1px solid rgba(201,168,76,0.22); }
+.prob-badge.amber  { background: rgba(201,168,76,0.08); color: var(--gold-light); border: 1px solid rgba(201,168,76,0.18); }
+.prob-badge.blue   { background: rgba(138,154,181,0.1); color: var(--gray); border: 1px solid rgba(138,154,181,0.2); }
+
+.td-range {
+  text-align: right; white-space: nowrap; vertical-align: middle;
+  font-size: 0.78rem; color: var(--gray); font-weight: 300;
+}
+.td-val {
+  text-align: right; white-space: nowrap; vertical-align: middle;
+  font-weight: 400; color: var(--cream);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.88rem;
+}
+
+/* Subtotal row */
+.roi-subtotal {
+  background: rgba(201,168,76,0.03) !important;
+  border-top: 1px solid var(--border-inv2) !important;
+}
+.roi-subtotal td { padding: 0.85rem 1.25rem; }
+.roi-subtotal .subtotal-label {
+  font-size: 0.72rem; font-weight: 500; color: var(--gray);
+}
+.roi-subtotal .subtotal-note {
+  font-size: 0.65rem; color: var(--gray); margin-top: 0.1rem; font-weight: 300;
+}
+.roi-subtotal .td-val {
+  font-size: 0.88rem; color: var(--cream);
+}
+
+/* Total row */
+.roi-total {
+  background: rgba(201,168,76,0.05) !important;
+  border-top: 2px solid rgba(201,168,76,0.22) !important;
+}
+.roi-total td { padding: 1.1rem 1.25rem; }
+.roi-total .total-label {
+  font-size: 0.78rem; font-weight: 500; color: var(--cream);
+}
+.roi-total .total-note {
+  font-size: 0.66rem; color: rgba(201,168,76,0.45); margin-top: 0.2rem; font-weight: 300;
+}
+.roi-total .td-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem; color: var(--gold) !important; font-weight: 700;
+}
+
+/* ── EXPOSURE CALLOUT ── */
+.exposure-callout {
+  margin-top: 1.25rem;
+  background: linear-gradient(135deg, rgba(201,168,76,0.08) 0%, rgba(201,168,76,0.03) 100%);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 6px;
+  padding: 1.5rem 2rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+}
+.exposure-left {}
+.exposure-eyebrow {
+  font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); font-weight: 500; margin-bottom: 0.4rem;
+}
+.exposure-amount {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 700; color: var(--cream); line-height: 1;
+  letter-spacing: -0.03em;
+}
+.exposure-caption {
+  font-size: 0.78rem; line-height: 1.65; color: var(--gray);
+  margin-top: 0.5rem; font-weight: 300; max-width: 320px;
+}
+.exposure-caption strong { color: var(--cream); font-weight: 400; }
+.exposure-right {
+  display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end; flex-shrink: 0;
+}
+.exposure-pill {
+  text-align: right;
+  background: rgba(201,168,76,0.04); border: 1px solid var(--border-inv);
+  border-radius: 4px; padding: 0.5rem 0.85rem;
+}
+.exposure-pill-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem; font-weight: 700; color: var(--cream);
+  line-height: 1; letter-spacing: -0.02em;
+}
+.exposure-pill-label {
+  font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gray); margin-top: 0.15rem;
+}
+
+/* ── ROI FLIP SECTION ── */
+.roi-flip-section {
+  border: 1px solid var(--border-inv2);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 2rem;
+}
+.roi-flip-header {
+  background: rgba(201,168,76,0.04);
+  padding: 1rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border-inv2);
+}
+.roi-flip-title {
+  font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--gray); font-weight: 500;
+}
+.roi-flip-subtitle {
+  font-size: 0.75rem; color: var(--gray); font-weight: 300;
+  text-align: right;
+}
+
+.roi-flip-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.flip-col {
+  padding: 1.5rem 1.75rem;
+  border-right: 1px solid var(--border-inv);
+}
+.flip-col:last-child { border-right: none; }
+.flip-col-label {
+  font-size: 0.6rem; letter-spacing: 0.13em; text-transform: uppercase;
+  font-weight: 500; margin-bottom: 0.6rem;
+}
+.flip-col-label.red  { color: rgba(235,87,87,0.7); }
+.flip-col-label.teal { color: var(--gold); }
+.flip-col-label.gold { color: var(--gold); }
+
+.flip-amount {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; font-weight: 700; line-height: 1;
+  letter-spacing: -0.02em; margin-bottom: 0.4rem;
+}
+.flip-amount.red   { color: rgba(235,87,87,0.75); }
+.flip-amount.teal  { color: var(--gold); }
+.flip-amount.gold  { color: var(--gold); }
+
+.flip-desc {
+  font-size: 0.76rem; line-height: 1.65;
+  color: var(--gray); font-weight: 300;
+}
+.flip-desc strong { color: var(--cream); font-weight: 400; }
+
+.flip-assumption {
+  margin-top: 0.65rem; padding-top: 0.65rem;
+  border-top: 1px solid var(--border-inv);
+  font-size: 0.68rem; color: var(--gray); font-style: italic;
+}
+
+.roi-multiple-bar {
+  background: rgba(201,168,76,0.04);
+  border-top: 1px solid var(--border-inv);
+  padding: 1rem 1.75rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+}
+.roi-multiple-label {
+  font-size: 0.72rem; color: var(--gray); font-weight: 300;
+}
+.roi-multiple-label strong { color: var(--cream); font-weight: 500; }
+.roi-multiple-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem; font-weight: 700; color: var(--gold);
+  letter-spacing: -0.02em; white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── PRICING TOGGLE ── */
+.pricing-toggle-wrap {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid var(--border-inv2);
+  background: rgba(201,168,76,0.02);
+}
+.pricing-toggle-label {
+  font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gray); font-weight: 500; margin-right: 0.25rem;
+}
+.toggle-btn {
+  font-size: 0.72rem; font-weight: 500; font-family: 'DM Sans', sans-serif;
+  padding: 0.3rem 0.85rem; border-radius: 20px; cursor: pointer;
+  border: 1px solid var(--border-inv2);
+  background: transparent; color: var(--gray);
+  transition: all 0.18s; letter-spacing: 0.02em;
+}
+.toggle-btn.active {
+  background: rgba(201,168,76,0.12); color: var(--gold);
+  border-color: rgba(201,168,76,0.35);
+}
+.toggle-btn.active.enterprise {
+  background: rgba(201,168,76,0.08); color: var(--gold-light);
+  border-color: rgba(201,168,76,0.25);
+}
+.toggle-enterprise-note {
+  font-size: 0.7rem; color: var(--gray); font-weight: 300;
+  margin-left: auto;
+}
+.toggle-enterprise-note a {
+  color: rgba(196,154,60,0.6); text-decoration: none;
+  border-bottom: 1px solid rgba(196,154,60,0.25);
+}
+.toggle-enterprise-note a:hover { color: var(--gold); }
+
+/* ── FOOTNOTES ── */
+.footnotes {
+  margin-top: 2rem;
+  font-size: 0.68rem; line-height: 1.75;
+  color: rgba(138,154,181,0.6); font-style: italic;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-inv);
+}
+
+/* ── FOOTER ── */
+.footer {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-inv);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem; font-weight: 700; color: var(--gray);
+  letter-spacing: -0.02em;
+}
+.footer-logo .pipe { color: rgba(201,168,76,0.35); }
+.footer-contact {
+  font-size: 0.72rem; color: rgba(138,154,181,0.6);
+  text-align: right; line-height: 1.7;
+}
+.footer-contact a { color: rgba(201,168,76,0.4); text-decoration: none; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeUp 0.55s ease forwards; }
+.d1 { animation-delay: 0.05s; opacity: 0; }
+.d2 { animation-delay: 0.18s; opacity: 0; }
+.d3 { animation-delay: 0.32s; opacity: 0; }
+.d4 { animation-delay: 0.46s; opacity: 0; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 800px) {
+  .page { padding: 1.5rem 1.25rem 3rem; }
+  .main-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-stat-strip { flex-direction: row; align-items: flex-start; justify-content: flex-start; flex-wrap: wrap; }
+  .hero-stat { min-width: 0; text-align: left; }
+  .hero-stat-num { font-size: 1.2rem; }
+  .exposure-callout { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .exposure-right { flex-direction: row; align-items: flex-start; }
+  .roi-flip-body { grid-template-columns: 1fr; }
+  .flip-col { border-right: none; border-bottom: 1px solid var(--border-inv); }
+  .flip-col:last-child { border-bottom: none; }
+  .roi-table thead th.hide-mobile { display: none; }
+  .roi-table td.hide-mobile { display: none; }
+}
+</style>
+</head>
+<body>
+<nav style="background:#1a0f3a;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:68px;border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:0;z-index:100;font-family:'DM Sans',sans-serif">
+  <a href="01-homepage.html" style="display:flex;align-items:center;text-decoration:none">
+    <span style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:#ffa84c">Life|After®</span>
+  </a>
+  <ul style="display:flex;gap:28px;align-items:center;list-style:none">
+    <li><a href="02-our-story.html" style="color:rgba(255,255,255,0.58);text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500">Our story</a></li>
+    <li><a href="03-how-it-works.html" style="color:rgba(255,255,255,0.58);text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500">How it works</a></li>
+    <li><a href="04-for-brokers.html" style="color:rgba(255,255,255,0.58);text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500">For brokers</a></li>
+    <li><a href="05-roi.html" style="color:rgba(255,255,255,0.58);text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500">ROI</a></li>
+    <li><a href="06-universities.html" style="color:rgba(255,255,255,0.58);text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500">Universities</a></li>
+    <li><a href="05-roi.html" style="color:rgba(255,255,255,0.58);text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500">ROI</a></li>
+    <li><a href="08-roi-calculator.html" style="color:#ffa84c;text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500">Calculator</a></li>
+    <li><a href="07-insights.html" style="color:rgba(255,255,255,0.58);text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500">Insights</a></li>
+    <li><a href="tel:8777523837" style="background:#4b389b;color:#fff;padding:8px 20px;border-radius:2px;text-decoration:none;font-size:13px;font-weight:500">Request a call</a></li>
+  </ul>
+</nav>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="header fade-in d1">
+    <a class="logo" href="https://lifeafter.net">Life<span class="pipe">|</span>After<sup>®</sup></a>
+    <div class="header-meta">
+      <div class="header-badge">Interactive Tool</div>
+      <div class="header-tagline">Post-Treatment ROI Calculator</div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero fade-in d2">
+    <div class="hero-text">
+      <h1>What cancer survivorship<br>costs your organization <em>right now.</em></h1>
+      <p>
+        Life|After® addresses the phase most employers overlook: <strong>after treatment ends.</strong>
+        Every figure below is specific to the post-treatment return-to-work window —
+        two mutually exclusive survivor paths, no employee counted twice.
+      </p>
+      <div class="hero-gold-rule"></div>
+    </div>
+    <div class="hero-stat-strip">
+      <div class="hero-stat">
+        <div class="hero-stat-num">1 in 100</div>
+        <div class="hero-stat-label">New diagnoses / year</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num teal">70%</div>
+        <div class="hero-stat-label">Survivors return to work</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN GRID -->
+  <div class="main-grid fade-in d3">
+
+    <!-- SLIDERS -->
+    <div class="sliders-panel">
+      <div class="panel-heading">Adjust your organization's profile</div>
+
+      <div class="slider-card">
+        <p class="slider-label">Employee Headcount</p>
+        <div class="slider-display">
+          <span class="slider-num" id="headcount-display">500</span>
+          <span class="slider-unit">employees</span>
+        </div>
+        <input type="range" class="roi-slider" id="headcount-slider" min="50" max="10000" step="50" value="500">
+        <div class="slider-range"><span>50</span><span>10,000</span></div>
+        <div class="slider-note">
+          At <strong id="note-headcount">500</strong> employees: ~<strong id="note-diagnoses">5</strong> new diagnoses/yr.
+          Estimated <strong id="note-rtw-est">2–4</strong> in post-treatment RTW phase at any time.
+        </div>
+      </div>
+
+      <div class="slider-card">
+        <p class="slider-label">Employees in Post-Treatment RTW Phase</p>
+        <div class="slider-display">
+          <span class="slider-num" id="rtw-display">3</span>
+          <span class="slider-unit">active cases</span>
+        </div>
+        <input type="range" class="roi-slider" id="rtw-slider" min="1" max="100" step="1" value="3">
+        <div class="slider-range"><span>1</span><span>100</span></div>
+        <div class="slider-note">
+          Survivors who have completed treatment and are returning, on modified duty, on extended post-treatment leave, or whose return has been delayed.
+          <strong>Check FMLA and STD files.</strong>
+        </div>
+      </div>
+
+      <div class="slider-card">
+        <p class="slider-label">Avg. Annual Salary — Affected Roles</p>
+        <div class="slider-display">
+          <span class="slider-num" id="salary-display">$60K</span>
+          <span class="slider-unit">per year</span>
+        </div>
+        <input type="range" class="roi-slider" id="salary-slider" min="30000" max="250000" step="5000" value="60000">
+        <div class="slider-range"><span>$30K</span><span>$250K</span></div>
+        <div class="slider-note">
+          Used for Path A only. Replacement runs <strong>50%–150% of salary</strong> depending on role complexity and institutional knowledge.
+        </div>
+      </div>
+
+      <div class="slider-card">
+        <p class="slider-label">Co-Worker Caregivers — Active</p>
+        <div class="slider-display">
+          <span class="slider-num" id="caregiver-display">3</span>
+          <span class="slider-unit">employees</span>
+        </div>
+        <input type="range" class="roi-slider" id="caregiver-slider" min="0" max="50" step="1" value="3">
+        <div class="slider-range"><span>0</span><span>50</span></div>
+        <div class="slider-note">
+          Employees supporting a colleague or loved one with cancer — a separate population.
+          Each absorbs <strong>~23% productivity loss</strong> annually.
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="results-panel">
+
+      <div class="roi-table-wrap">
+        <table class="roi-table">
+          <thead>
+            <tr>
+              <th style="width:46%">Post-Treatment Cost Path</th>
+              <th class="col-center hide-mobile">Probability</th>
+              <th class="col-right hide-mobile">Cost Per Case</th>
+              <th class="col-right">Expected Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              <td>
+                <div class="path-name">
+                  <span class="path-tag a">Path A</span>
+                  Survivor does not return
+                </div>
+                <div class="path-desc">Replacement only: recruiting, onboarding, lost institutional knowledge. Scaled to role salary at 50%–150%.</div>
+                <div class="path-source">Sources: SHRM · JCO PMC6992498</div>
+              </td>
+              <td class="td-prob hide-mobile"><span class="prob-badge green">30% of cases</span></td>
+              <td class="td-range hide-mobile" id="path-a-per-case">$30K – $90K</td>
+              <td class="td-val" id="row-a">—</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="path-name">
+                  <span class="path-tag b">Path B</span>
+                  Survivor returns to work
+                </div>
+                <div class="path-desc">Combined post-treatment cost: re-integration, delayed return, absenteeism &amp; presenteeism — expressed as one researched range per survivor. Not stacked independent events.</div>
+                <div class="path-source">Sources: CDC MEPS PMC5779368 · JNCI PMC7745836 · Frontiers PMC9039203 · PMC4642612</div>
+              </td>
+              <td class="td-prob hide-mobile"><span class="prob-badge amber">70% of cases</span></td>
+              <td class="td-range hide-mobile">$22K – $48K</td>
+              <td class="td-val" id="row-b">—</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="path-name">
+                  <span class="path-tag c">Caregivers</span>
+                  Co-worker caregiver presenteeism
+                </div>
+                <div class="path-desc">Entirely separate employee population. ~23% mean productivity loss per caregiver annually. Not a survivor cost — a distinct parallel impact.</div>
+                <div class="path-source">Source: PMC4381346</div>
+              </td>
+              <td class="td-prob hide-mobile"><span class="prob-badge blue">Your estimate</span></td>
+              <td class="td-range hide-mobile">$5K – $12K</td>
+              <td class="td-val" id="row-c">—</td>
+            </tr>
+
+            <tr class="roi-total">
+              <td colspan="3">
+                <div class="total-label">Total Expected Post-Treatment Cost</div>
+                <div class="total-note">Path A and Path B are mutually exclusive — each survivor follows exactly one path.</div>
+              </td>
+              <td class="td-val" id="row-total">—</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <!-- EXPOSURE CALLOUT -->
+      <div class="exposure-callout">
+        <div class="exposure-left">
+          <div class="exposure-eyebrow">Annual Unmanaged Exposure</div>
+          <div class="exposure-amount" id="callout-total">—</div>
+          <div class="exposure-caption">
+            Two paths. No employee counted twice. Replacement cost scaled to the actual role.
+            <strong>Life|After® pays for itself on the first case.</strong>
+          </div>
+        </div>
+        <div class="exposure-right">
+          <div class="exposure-pill">
+            <div class="exposure-pill-num" id="pill-cases">—</div>
+            <div class="exposure-pill-label">Active RTW cases</div>
+          </div>
+          <div class="exposure-pill">
+            <div class="exposure-pill-num" id="pill-caregivers">—</div>
+            <div class="exposure-pill-label">Co-worker caregivers</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ROI FLIP SECTION -->
+  <div class="roi-flip-section fade-in d4">
+    <div class="roi-flip-header">
+      <div class="roi-flip-title">Life|After® Return on Investment</div>
+      <div class="roi-flip-subtitle">What the program costs vs. what it prevents</div>
+    </div>
+
+    <!-- PRICING TOGGLE -->
+    <div class="pricing-toggle-wrap">
+      <span class="pricing-toggle-label">Pricing</span>
+      <button class="toggle-btn active" id="toggle-standard" onclick="setPricing('standard')">Standard</button>
+      <button class="toggle-btn enterprise" id="toggle-enterprise" onclick="setPricing('enterprise')">Enterprise</button>
+      <span class="toggle-enterprise-note" id="enterprise-note" style="display:none">
+        Volume pricing available — <a href="mailto:info@lifeafter.net">contact us</a> for a custom quote.
+      </span>
+    </div>
+
+    <div class="roi-flip-body">
+      <div class="flip-col">
+        <div class="flip-col-label red">Without Life|After®</div>
+        <div class="flip-amount red" id="flip-exposure">—</div>
+        <div class="flip-desc">
+          Estimated annual exposure based on your current headcount and case load —
+          <strong>unmanaged post-treatment costs</strong> absorbed as hidden overhead.
+        </div>
+        <div class="flip-assumption">Your figures from the calculator above</div>
+      </div>
+      <div class="flip-col">
+        <div class="flip-col-label teal">Program Investment</div>
+        <div class="flip-amount teal" style="font-size:1rem;padding-top:0.5rem;" id="flip-program-cost">Contact for pricing</div>
+        <div class="flip-desc" id="flip-program-desc">
+          Structured return-to-work support that reduces post-treatment productivity loss by <strong>40%–60%</strong>
+          and cuts non-return rates significantly. Pricing provided directly.
+        </div>
+        <div class="flip-assumption" id="flip-program-note"><a href="mailto:info@lifeafter.net" style="color:inherit">info@lifeafter.net</a> · (877) 752-3837</div>
+      </div>
+      <div class="flip-col">
+        <div class="flip-col-label gold">Estimated Net Savings</div>
+        <div class="flip-amount gold" id="flip-savings">—</div>
+        <div class="flip-desc">
+          Exposure reduced by 50% (conservative), minus program investment.
+          <strong>Typically positive on the first case.</strong>
+        </div>
+        <div class="flip-assumption">50% of midpoint exposure, minus program cost</div>
+      </div>
+    </div>
+    <div class="roi-multiple-bar">
+      <div class="roi-multiple-label" id="roi-bar-label">
+        Estimated exposure reduction at a conservative 50% —
+        based on midpoint exposure figures above.
+      </div>
+      <div class="roi-multiple-val" id="flip-multiple">—× ROI</div>
+    </div>
+  </div>
+
+  <!-- FOOTNOTES -->
+  <div class="footnotes fade-in d4">
+    All figures reflect post-treatment costs only — after treatment ends, not during active treatment.
+    Path A and Path B are mutually exclusive; every survivor follows exactly one.
+    Path B combines re-integration, delayed return, absenteeism, and presenteeism as a single per-survivor figure — not stacked independent events.
+    Caregiver costs represent a separate employee population.
+    Exposure reduction estimates apply a conservative 50% reduction to the midpoint exposure figure. Actual results vary by organization size, industry, and program implementation. Program pricing is provided directly — contact Life|After® for a quote.
+    &nbsp;
+    Sources: SHRM Human Capital Benchmarking · JCO PMC6992498 · CDC MEPS PMC5779368 · JNCI PMC7745836 · Frontiers PMC9039203 · PMC4642612 · PMC4381346.
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">Life<span class="pipe">|</span>After<sup style="font-size:0.5em;font-family:'DM Sans',sans-serif;">®</sup></div>
+    <div class="footer-contact">
+      <a href="https://lifeafter.net">lifeafter.net</a> &nbsp;·&nbsp;
+      <a href="tel:18777523837">(877) 752-3837</a> &nbsp;·&nbsp;
+      <a href="mailto:info@lifeafter.net">info@lifeafter.net</a>
+    </div>
+  
+  <div style="padding:14px 0;margin-top:20px;border-top:1px solid rgba(255,255,255,0.06);text-align:center"><p style="font-size:13px;color:rgba(255,255,255,0.35);font-weight:300">Are you a survivor or caregiver? &nbsp;<a href="https://www.lifeaftersurvivor.com" style="color:var(--gold-lt);text-decoration:none;font-weight:400">Visit lifeaftersurvivor.com →</a></p></div>
+</footer>
+
+</div>
+
+<script>
+(function() {
+  var hSlider   = document.getElementById('headcount-slider');
+  var rSlider   = document.getElementById('rtw-slider');
+  var salSlider = document.getElementById('salary-slider');
+  var cSlider   = document.getElementById('caregiver-slider');
+
+  var PER_CASE_COST = 7500;
+  var pricingMode   = 'standard'; // 'standard' | 'enterprise'
+
+  window.setPricing = function(mode) {
+    pricingMode = mode;
+    document.getElementById('toggle-standard').classList.toggle('active', mode === 'standard');
+    document.getElementById('toggle-enterprise').classList.toggle('active', mode === 'enterprise');
+    document.getElementById('enterprise-note').style.display = mode === 'enterprise' ? 'inline' : 'none';
+    update();
+  };
+
+  function fmtSalary(n) { return '$' + Math.round(n/1000) + 'K'; }
+  function fmt(n) {
+    if (n >= 1000000) return '$' + (n/1000000).toFixed(1) + 'M';
+    if (n >= 1000)    return '$' + Math.round(n/1000) + 'K';
+    return '$' + Math.round(n).toLocaleString();
+  }
+  function fmtRange(lo, hi) { return fmt(lo) + ' \u2013 ' + fmt(hi); }
+  function setFill(s) {
+    var pct = (parseFloat(s.value) - parseFloat(s.min)) /
+              (parseFloat(s.max)   - parseFloat(s.min)) * 100;
+    s.style.background =
+      'linear-gradient(to right, var(--gold) 0%, var(--gold) ' + pct +
+      '%, rgba(201,168,76,0.07) ' + pct + '%)';
+  }
+
+  function update() {
+    var headcount  = parseInt(hSlider.value);
+    var n          = parseInt(rSlider.value);
+    var salary     = parseInt(salSlider.value);
+    var caregivers = parseInt(cSlider.value);
+
+    var diagnoses = Math.max(1, Math.round(headcount * 0.01));
+    var rtwLo     = Math.max(1, Math.round(diagnoses * 0.30));
+    var rtwHi     = Math.max(2, Math.round(diagnoses * 0.40));
+    var rtwEst    = rtwLo === rtwHi ? rtwLo : (rtwLo + '\u2013' + rtwHi);
+
+    document.getElementById('headcount-display').textContent = headcount.toLocaleString();
+    document.getElementById('rtw-display').textContent       = n;
+    document.getElementById('salary-display').textContent    = fmtSalary(salary);
+    document.getElementById('caregiver-display').textContent = caregivers;
+    document.getElementById('note-headcount').textContent    = headcount.toLocaleString();
+    document.getElementById('note-diagnoses').textContent    = diagnoses;
+    document.getElementById('note-rtw-est').textContent      = rtwEst;
+
+    setFill(hSlider); setFill(rSlider); setFill(salSlider); setFill(cSlider);
+
+    // ── Exposure calc ──
+    var perCaseLo = salary * 0.50;
+    var perCaseHi = salary * 1.50;
+    var aLo = perCaseLo * n * 0.30;
+    var aHi = perCaseHi * n * 0.30;
+    document.getElementById('path-a-per-case').textContent = fmtRange(perCaseLo, perCaseHi);
+
+    var bLo = 22000 * n * 0.70;
+    var bHi = 48000 * n * 0.70;
+
+    var cLo = 5000  * caregivers;
+    var cHi = 12000 * caregivers;
+
+    var tLo  = aLo + bLo + cLo;
+    var tHi  = aHi + bHi + cHi;
+    var tMid = (tLo + tHi) / 2;
+
+    document.getElementById('row-a').textContent          = fmtRange(aLo, aHi);
+    document.getElementById('row-b').textContent          = fmtRange(bLo, bHi);
+    document.getElementById('row-c').textContent          = caregivers === 0 ? '\u2014' : fmtRange(cLo, cHi);
+    document.getElementById('row-total').textContent      = fmtRange(tLo, tHi);
+    document.getElementById('callout-total').textContent  = fmtRange(tLo, tHi);
+    document.getElementById('pill-cases').textContent     = n;
+    document.getElementById('pill-caregivers').textContent = caregivers;
+
+    // ── ROI Flip ──
+    var isEnterprise  = pricingMode === 'enterprise';
+    var programCost   = isEnterprise ? null : PER_CASE_COST * n;
+    var reducedMid    = tMid * 0.50;   // 50% reduction at midpoint
+
+    // Program cost display
+    if (isEnterprise) {
+      document.getElementById('flip-program-cost').textContent = 'Custom pricing';
+      document.getElementById('flip-program-desc').innerHTML =
+        '<strong>Enterprise volume pricing</strong> — structured return-to-work management ' +
+        'that reduces post-treatment productivity loss by <strong>40%–60%</strong>. ' +
+        'Contact us for a quote tailored to your organization.';
+      document.getElementById('flip-program-note').textContent = 'Contact Life|After® for enterprise pricing';
+      document.getElementById('roi-bar-label').innerHTML =
+        'Enterprise pricing reduces program cost below Standard — ' +
+        '<strong>contact us</strong> to model your specific ROI.';
+      document.getElementById('flip-savings').textContent = fmt(reducedMid) + ' reduced';
+      document.getElementById('flip-multiple').textContent = 'Ask us';
+    } else {
+      document.getElementById('flip-program-cost').textContent = 'Contact for pricing';
+      document.getElementById('flip-program-desc').innerHTML =
+        '<strong>program pricing per active case</strong> — structured return-to-work management ' +
+        'that reduces post-treatment productivity loss by <strong>40%–60%</strong> ' +
+        'and cuts non-return rates significantly.';
+      document.getElementById('flip-program-note').innerHTML = '<a href="mailto:info@lifeafter.net" style="color:inherit">info@lifeafter.net</a> · (877) 752-3837';
+      document.getElementById('roi-bar-label').innerHTML =
+        'Estimated exposure reduction — based on midpoint exposure figures and a conservative 50% reduction. Contact Life|After® for pricing.';
+
+      var netSavings = reducedMid - programCost;
+      var roi        = programCost > 0 ? (netSavings / programCost) : 0;
+
+      document.getElementById('flip-savings').textContent  = netSavings > 0 ? fmt(netSavings) : '\u2014';
+      document.getElementById('flip-multiple').textContent =
+        roi > 0
+          ? (roi >= 10 ? Math.round(roi) : roi.toFixed(1)) + '\u00d7 ROI'
+          : 'Break-even';
+    }
+
+    document.getElementById('flip-exposure').textContent = fmtRange(tLo, tHi);
+  }
+
+  hSlider.addEventListener('input', update);
+  rSlider.addEventListener('input', update);
+  salSlider.addEventListener('input', update);
+  cSlider.addEventListener('input', update);
+  update();
+})();
+</script>
+</body>
+</html>
