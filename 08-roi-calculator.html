@@ -606,6 +606,38 @@ html, body { overflow-x: hidden; max-width: 100vw; }
   .pull-quote { padding-left: 16px !important; }
 }
 
+
+@media (max-width: 768px) {
+  /* Collapse ALL multi-column grids */
+  .why-grid, .posts-grid, .reality-cards, .caregiver-cards,
+  .caregiver-stat, .beyond-cards, .campus-edu-cards, .campus-edu-addons,
+  .workplace-edu-addons, .compliance-cards, .risk-cards, .cost-row,
+  .cost-layout, .cost-table-header, .clients-layout, .foundation-layout,
+  .gap-grid, .gap-layout, .model-facts, .mission-stats, .cred-list,
+  .cred-row, .origin-layout, .legal-layout, .obj-grid, .gap-facts,
+  .broker-value-grid, .value-compare, .value-items, .big-stats,
+  .stat-strip-inner, .reality-strip-inner, .symptom-grid, .symptom-row,
+  .specialists-grid, .experience-list, .client-types {
+    display: block !important;
+  }
+  .why-grid > *, .posts-grid > *, .reality-cards > *,
+  .caregiver-cards > *, .beyond-cards > *, .campus-edu-cards > *,
+  .campus-edu-addons > *, .workplace-edu-addons > *, .compliance-cards > *,
+  .risk-cards > *, .clients-layout > *, .gap-facts > *, .obj-grid > *,
+  .value-items > *, .symptom-grid > *, .specialists-grid > * {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 16px !important;
+  }
+  /* Fix inline styles with fixed widths */
+  [style*="width:6"], [style*="width:5"], [style*="width:4"],
+  [style*="min-width:"] {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+}
+
 </style>
 
 </head>
