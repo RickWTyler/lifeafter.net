@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Hidden Risk in Every Workday | Life|After® Insights</title>
@@ -90,6 +93,9 @@ footer a:hover{color:var(--gold-lt)}
 .disclaimer{font-size:12px;color:var(--soft);margin-top:48px;padding-top:24px;border-top:1px solid var(--border);line-height:1.7;font-weight:300}
 
 @media(max-width:680px){
+  nav{height:auto;flex-wrap:wrap;align-items:flex-start;row-gap:10px;padding-top:12px;padding-bottom:12px}
+  .nav-right{flex-wrap:wrap;gap:10px 16px}
+  footer{flex-wrap:wrap;height:auto;gap:8px 16px}
   nav,footer{padding-left:24px;padding-right:24px}
   .page-header,.article-wrap,.cta-section{padding-left:24px;padding-right:24px}
   .page-header h1{font-size:36px}
@@ -97,19 +103,63 @@ footer a:hover{color:var(--gold-lt)}
   .stat-block{padding:32px 24px}
 }
 </style>
+<style id="la-mobile-overflow">
+@media (max-width: 768px) {
+  .problem-strip { padding-left: 16px !important; padding-right: 16px !important; }
+  .steps-grid,
+  .roi-grid,
+  .premise-section,
+  .gap-timeline,
+  .symptom-row {
+    grid-template-columns: 1fr !important;
+  }
+  .roi-bottom {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 20px !important;
+  }
+  .filter-bar {
+    flex-wrap: wrap !important;
+    height: auto !important;
+    row-gap: 8px !important;
+  }
+  .cta-contact-block {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 16px !important;
+  }
+  .contact-card {
+    min-width: 0 !important;
+    width: auto !important;
+    max-width: 100% !important;
+  }
+  .roi-table-wrap {
+    overflow-x: auto !important;
+    max-width: 100% !important;
+  }
+  .main-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .sliders-panel, .slider-card, .roi-slider { min-width: 0 !important; max-width: 100% !important; }
+  [style*="grid-template-columns:repeat(3"],
+  [style*="grid-template-columns:repeat(4"],
+  [style*="grid-template-columns: repeat(3"],
+  [style*="grid-template-columns: repeat(4"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+</style>
 </head>
 <body>
 
 <nav>
-  <a href="#" class="nav-logo">Life|After<span>®</span></a>
+  <a href="/" class="nav-logo">Life|After<span>®</span></a>
   <div class="nav-right">
-    <a href="#" class="nav-link">Our story</a>
-    <a href="#" class="nav-link">How it works</a>
-    <a href="#" class="nav-link">ROI</a>
-    <a href="#" class="nav-link">Universities</a>
-    <a href="#" class="nav-link">For brokers</a>
-    <a href="#" class="nav-link active">Insights</a>
-    <a href="#" class="nav-cta">Request a call</a>
+    <a href="02-our-story.html" class="nav-link">Our story</a>
+    <a href="03-how-it-works.html" class="nav-link">How it works</a>
+    <a href="05-roi.html" class="nav-link">ROI</a>
+    <a href="06-universities.html" class="nav-link">Universities</a>
+    <a href="04-for-brokers.html" class="nav-link">For brokers</a>
+    <a href="insights.html" class="nav-link active">Insights</a>
+    <a href="tel:985-206-9231" class="nav-cta">Request a call</a>
   </div>
 </nav>
 
