@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Hidden Cost of a Cancer Diagnosis on a Workforce | Life|After® Insights</title>
@@ -388,6 +391,50 @@
     .stat-callout { background: var(--cream-deep) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     article { padding: 30px; }
   }
+</style>
+<style id="la-mobile-overflow">
+@media (max-width: 768px) {
+  .problem-strip { padding-left: 16px !important; padding-right: 16px !important; }
+  .steps-grid,
+  .roi-grid,
+  .premise-section,
+  .gap-timeline,
+  .symptom-row {
+    grid-template-columns: 1fr !important;
+  }
+  .roi-bottom {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 20px !important;
+  }
+  .filter-bar {
+    flex-wrap: wrap !important;
+    height: auto !important;
+    row-gap: 8px !important;
+  }
+  .cta-contact-block {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 16px !important;
+  }
+  .contact-card {
+    min-width: 0 !important;
+    width: auto !important;
+    max-width: 100% !important;
+  }
+  .roi-table-wrap {
+    overflow-x: auto !important;
+    max-width: 100% !important;
+  }
+  .main-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .sliders-panel, .slider-card, .roi-slider { min-width: 0 !important; max-width: 100% !important; }
+  [style*="grid-template-columns:repeat(3"],
+  [style*="grid-template-columns:repeat(4"],
+  [style*="grid-template-columns: repeat(3"],
+  [style*="grid-template-columns: repeat(4"] {
+    grid-template-columns: 1fr !important;
+  }
+}
 </style>
 </head>
 <body>
