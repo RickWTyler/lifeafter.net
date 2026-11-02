@@ -328,50 +328,22 @@
     margin-bottom: 0;
   }
 
-  /* Footer */
-  footer {
-    background: var(--navy-deep);
-    color: var(--cream);
-    padding: 56px 32px;
-    margin-top: 80px;
-    text-align: center;
-  }
-  footer .footer-inner {
-    max-width: 720px;
-    margin: 0 auto;
-  }
-  footer .signature {
-    font-family: var(--serif);
-    font-size: 28px;
-    font-weight: 500;
-    color: var(--cream);
-    margin-bottom: 8px;
-  }
-  footer .signature .reg {
-    font-size: 13px;
-    vertical-align: super;
-    color: var(--gold-soft);
-  }
-  footer .tagline {
-    font-family: var(--serif);
-    font-style: italic;
-    color: var(--gold-soft);
-    font-size: 17px;
-    margin-bottom: 32px;
-  }
-  footer .url {
-    font-family: var(--sans);
-    font-size: 12px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--gold);
-    text-decoration: none;
-  }
-  footer .divider {
-    width: 60px;
-    height: 1px;
-    background: var(--gold);
-    margin: 24px auto;
+  /* Site nav and footer, matched to the other Insights articles */
+  nav{background:#1a0f3a;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:68px;border-bottom:1px solid rgba(255,255,255,0.06)}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:500;color:#ffa84c;text-decoration:none;letter-spacing:0.04em}
+  .nav-logo span{color:rgba(255,255,255,0.6)}
+  .nav-right{display:flex;gap:28px;align-items:center}
+  .nav-link{color:rgba(255,255,255,0.55);text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500}
+  .nav-link.active{color:#ffa84c}
+  .nav-cta{background:#4b389b;color:#ffffff;padding:8px 20px;font-size:13px;font-weight:500;text-decoration:none;letter-spacing:0.06em;text-transform:uppercase}
+  footer{background:#1a0f3a;padding:32px 48px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.06);margin:0}
+  .footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#ffa84c}
+  footer span,footer a{font-size:12px;color:rgba(255,255,255,0.3);letter-spacing:0.04em;text-decoration:none}
+  footer a:hover{color:#ffa84c}
+  @media(max-width:680px){
+    nav{height:auto;flex-wrap:wrap;align-items:flex-start;row-gap:10px;padding:12px 24px}
+    .nav-right{flex-wrap:wrap;gap:10px 16px}
+    footer{flex-wrap:wrap;height:auto;gap:8px 16px;padding-left:24px;padding-right:24px}
   }
 
   @media (max-width: 600px) {
@@ -386,7 +358,7 @@
 
   @media print {
     body { background: white; font-size: 12pt; }
-    .masthead, footer { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    nav, footer { background: #1a0f3a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .hero { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .stat-callout { background: var(--cream-deep) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     article { padding: 30px; }
@@ -439,12 +411,18 @@
 </head>
 <body>
 
-<header class="masthead">
-  <div class="masthead-inner">
-    <div class="brand">Life|After<span class="reg">®</span> &nbsp;<span style="opacity: 0.6; font-size: 14px; font-family: var(--sans); font-weight: 300; letter-spacing: 3px;">INSIGHTS</span></div>
-    <div class="masthead-meta">Workforce &nbsp;·&nbsp; Survivorship &nbsp;·&nbsp; Return-to-Work</div>
+<nav>
+  <a href="/" class="nav-logo">Life|After<span>®</span></a>
+  <div class="nav-right">
+    <a href="02-our-story.html" class="nav-link">Our story</a>
+    <a href="03-how-it-works.html" class="nav-link">How it works</a>
+    <a href="05-roi.html" class="nav-link">ROI</a>
+    <a href="06-universities.html" class="nav-link">Universities</a>
+    <a href="04-for-brokers.html" class="nav-link">For brokers</a>
+    <a href="insights.html" class="nav-link active">Insights</a>
+    <a href="tel:985-206-9231" class="nav-cta">Request a call</a>
   </div>
-</header>
+</nav>
 
 <section class="hero">
   <div class="hero-inner">
@@ -545,12 +523,9 @@
 </section>
 
 <footer>
-  <div class="footer-inner">
-    <div class="signature">Life|After<span class="reg">®</span></div>
-    <div class="tagline">Cancer survivorship, returned to work.</div>
-    <div class="divider"></div>
-    <a href="https://lifeafter.net" class="url">lifeafter.net</a>
-  </div>
+  <div class="footer-logo">Life|After®</div>
+  <span>© 2026 Life|After®. All rights reserved.</span>
+  <a href="tel:985-206-9231">985-206-9231</a>
 </footer>
 
 </body>
