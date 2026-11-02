@@ -241,32 +241,22 @@
     letter-spacing: 0.02em;
   }
 
-  /* Footer */
-  .footer {
-    margin-top: 80px;
-    padding-top: 32px;
-    border-top: 1px solid var(--rule);
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    color: var(--muted);
-  }
-
-  .footer .footer-brand {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--navy);
-    letter-spacing: 0.01em;
-  }
-
-  .footer .footer-brand .pipe { color: var(--gold); }
-  .footer .footer-brand .reg { font-size: 9px; vertical-align: super; color: var(--gold-deep); }
-
-  .footer .footer-url {
-    letter-spacing: 0.08em;
+  /* Site nav and footer, matched to the other Insights articles */
+  nav{background:#1a0f3a;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:68px;border-bottom:1px solid rgba(255,255,255,0.06)}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:500;color:#ffa84c;text-decoration:none;letter-spacing:0.04em}
+  .nav-logo span{color:rgba(255,255,255,0.6)}
+  .nav-right{display:flex;gap:28px;align-items:center}
+  .nav-link{color:rgba(255,255,255,0.55);text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500}
+  .nav-link.active{color:#ffa84c}
+  .nav-cta{background:#4b389b;color:#ffffff;padding:8px 20px;font-size:13px;font-weight:500;text-decoration:none;letter-spacing:0.06em;text-transform:uppercase}
+  footer{background:#1a0f3a;padding:32px 48px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.06);margin:0}
+  .footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#ffa84c}
+  footer span,footer a{font-size:12px;color:rgba(255,255,255,0.3);letter-spacing:0.04em;text-decoration:none}
+  footer a:hover{color:#ffa84c}
+  @media(max-width:680px){
+    nav{height:auto;flex-wrap:wrap;align-items:flex-start;row-gap:10px;padding:12px 24px}
+    .nav-right{flex-wrap:wrap;gap:10px 16px}
+    footer{flex-wrap:wrap;height:auto;gap:8px 16px;padding-left:24px;padding-right:24px}
   }
 
   /* Print */
@@ -345,13 +335,22 @@
 </head>
 <body>
 
+<nav>
+  <a href="/" class="nav-logo">Life|After<span>®</span></a>
+  <div class="nav-right">
+    <a href="02-our-story.html" class="nav-link">Our story</a>
+    <a href="03-how-it-works.html" class="nav-link">How it works</a>
+    <a href="05-roi.html" class="nav-link">ROI</a>
+    <a href="06-universities.html" class="nav-link">Universities</a>
+    <a href="04-for-brokers.html" class="nav-link">For brokers</a>
+    <a href="insights.html" class="nav-link active">Insights</a>
+    <a href="tel:985-206-9231" class="nav-cta">Request a call</a>
+  </div>
+</nav>
+
 <div class="page">
 
-  <header class="masthead">
-    <div class="brand">Life<span class="pipe">|</span>After<span class="reg">®</span></div>
-    <div class="masthead-meta">Insights &nbsp;·&nbsp; May 2026</div>
-  </header>
-
+  <div class="masthead-meta" style="margin-bottom:28px;">Insights &nbsp;·&nbsp; May 2026</div>
   <div class="category">Return-to-Work</div>
 
   <h1>
@@ -429,12 +428,13 @@
 
   <p class="end-note">Sources available on request.</p>
 
-  <footer class="footer">
-    <div class="footer-brand">Life<span class="pipe">|</span>After<span class="reg">®</span></div>
-    <div class="footer-url">lifeafter.net</div>
-  </footer>
-
 </div>
+
+<footer>
+  <div class="footer-logo">Life|After®</div>
+  <span>© 2026 Life|After®. All rights reserved.</span>
+  <a href="tel:985-206-9231">985-206-9231</a>
+</footer>
 
 </body>
 </html>
